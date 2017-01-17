@@ -109,5 +109,39 @@ class CreateTowerTestCase(unittest.TestCase):
         self.assertEqual(len(tower.rods[0].pieces), 3)
 
 
+class VisualizerTestCase(unittest.TestCase):
+    def test_render_piece(self):
+        from towers import Piece
+        from towersvisualizer import Visualizer
+
+        visualizer = Visualizer()
+        piece = Piece(3)
+
+        string = visualizer._render_piece(piece)
+
+        self.assertEqual(string, '[-----]')
+
+    def test_render_rod(self):
+        from towers import create_tower
+        from towersvisualizer import Visualizer
+
+        tower = create_tower(3, 3)
+        visualizer = Visualizer(tower)
+
+        # TODO
+
+    def test_visualize(self):
+        from towers import create_tower
+        from towersvisualizer import Visualizer
+
+        tower = create_tower(3, 3)
+        visualizer = Visualizer(tower)
+        rendered = visualizer.visualize()
+        print()
+        print(rendered)
+        print()
+
+
+
 if __name__ == '__main__':
     unittest.main()
