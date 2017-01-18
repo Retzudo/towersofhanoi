@@ -3,6 +3,7 @@ class TowerError(Exception):
 
 
 class Piece:
+    """A single piece on a rod."""
     def __init__(self, size):
         self.size = size
 
@@ -11,6 +12,7 @@ class Piece:
 
 
 class Rod:
+    """A rod. A tower consists of a number of rods."""
     def __init__(self, pieces=None):
         if not pieces:
             self.pieces = []
@@ -18,6 +20,10 @@ class Rod:
             self.pieces = pieces
 
     def push_piece(self, piece):
+        """Try to place a piece 'on top'.
+
+        Raise an error if not successul.
+        """
         if len(self.pieces) == 0:
             self.pieces.append(piece)
             return
@@ -35,6 +41,7 @@ class Rod:
             )
 
     def pop_piece(self):
+        """Remove and return the top piece of this rod."""
         return self.pieces.pop()
 
     def __str__(self):
@@ -45,6 +52,7 @@ class Rod:
 
 
 class Tower:
+    """A tower made of rods rods."""
     def __init__(self, rods=None):
         if not rods:
             self.rods = []
@@ -52,6 +60,8 @@ class Tower:
             self.rods = rods
 
     def move_piece(self, from_rod_index, to_rod_index):
+        """Pop a piece from one rod and try to place it
+        on another rod."""
         if from_rod_index == to_rod_index:
             return
         
@@ -62,7 +72,12 @@ class Tower:
         to_rod.push_piece(piece)
 
 
-def create_tower(num_of_rods, num_of_pieces):
+def create_tower(num_of_rods=3, num_of_pieces=3):
+    """Return a new Tower object.
+
+    Initialize the tower with the given number of rods and
+    the given number of pieces on rod #0.
+    """
     if num_of_rods <= 0 or num_of_pieces <= 0:
         raise ValueError('Number of pieces or rods must be > 0')
 

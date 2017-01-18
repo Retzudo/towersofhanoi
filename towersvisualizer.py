@@ -1,15 +1,9 @@
-import sys
-if sys.version_info[0] < 3:
-    from itertools import izip_longest as zip_longest
-else:
-    from itertools import zip_longest
-
-
 class Visualizer:
     def __init__(self, tower=None):
         self.tower = tower
 
     def _count_pieces(self):
+        """Return the number of total pieces in this tower."""
         pieces = 0
         for rod in self.tower.rods:
             pieces += len(rod.pieces)
@@ -17,6 +11,7 @@ class Visualizer:
         return pieces
 
     def _get_biggest_size(self):
+        """Return the size of the biggest piece in this tower."""
         size = 0
         for rod in self.tower.rods:
             for piece in rod.pieces:
@@ -27,9 +22,16 @@ class Visualizer:
 
     @staticmethod
     def _render_piece(piece):
+        """Return a string representation of a single piece."""
         return '[{}]'.format('-'*(piece.size*2-1))
 
     def _render_rod(self, rod):
+        """Return a list of strings that represent a rod.
+
+        Render each individual piece and pad the list with '|'
+        for empty spots. Also add an additional '|' to every rod
+        and padding around each line for aesthetic purpose.
+        """
         biggest_size = self._get_biggest_size()
         rendered_rod = []
         for piece in rod.pieces:
@@ -43,15 +45,16 @@ class Visualizer:
         return rendered_rod[::-1]
 
     def visualize(self):
+        """Render the whole tower to a string."""
         rendered_rods = []
         for rod in self.tower.rods:
             rendered_rods.append(self._render_rod(rod))
 
 
         lines = []
-        for line in zip_longest(*rendered_rods):
+        for line in zip(*rendered_rods):
             lines.append(' '.join(line) + ' ')
         
-        lines.append('_'*(len(lines[-1])+1))
+        lines.append('_'*(len(lines[-1])))
 
         return '\n'.join(lines)
