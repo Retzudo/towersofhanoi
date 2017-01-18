@@ -1,4 +1,4 @@
-#!/bin/python3
+#!/usr/bin/env python3
 import os
 from towers import create_tower, TowerError
 from towersvisualizer import Visualizer
@@ -29,6 +29,7 @@ def ask_for_init():
 
 def game_loop():
     """Main game loop."""
+    rods, pieces = ask_for_init()
     tower = create_tower(num_of_rods=rods, num_of_pieces=pieces)
     visualizer = Visualizer(tower)
 
