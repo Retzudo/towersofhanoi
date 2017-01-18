@@ -69,7 +69,12 @@ class Tower:
         to_rod = self.rods[to_rod_index]
 
         piece = from_rod.pop_piece()
-        to_rod.push_piece(piece)
+        try:
+            to_rod.push_piece(piece)
+        except TowerError:
+            # Revert
+            from_rod.push_piece(piece)
+            raise
 
 
 def create_tower(num_of_rods=3, num_of_pieces=3):
