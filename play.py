@@ -52,9 +52,6 @@ def game_loop():
                 print(visualizer.visualize())
                 break
 
-        os.system('clear')
-        print(visualizer.visualize())
-
         while True:
             try:
                 input_string = input('Move piece from rod #{} to rod #'.format(from_rod))
