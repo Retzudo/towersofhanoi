@@ -28,10 +28,7 @@ def ask_for_init():
     return rods, pieces
 
 def game_loop():
-    os.system('clear')
-    rods, pieces = ask_for_init()
-
-    print('Creating a tower with {} rod(s) and {} piece(s)'.format(rods, pieces))
+    """Main game loop."""
     tower = create_tower(num_of_rods=rods, num_of_pieces=pieces)
     visualizer = Visualizer(tower)
 
@@ -76,6 +73,7 @@ def game_loop():
 
 
 def main():
+    """Run the game loop and exit on Ctrl+C."""
     try:
         game_loop()
     except KeyboardInterrupt:
