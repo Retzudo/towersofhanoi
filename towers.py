@@ -1,7 +1,11 @@
+from functools import total_ordering
+
+
 class TowerError(Exception):
     pass
 
 
+@total_ordering
 class Piece:
     """A single piece on a rod."""
     def __init__(self, size):
@@ -9,6 +13,12 @@ class Piece:
 
     def __str__(self):
         return str(self.size)
+
+    def __lt__(self, other):
+        return self.size < other.size
+
+    def __eq__(self, other):
+        return self.size == other.size
 
 
 class Rod:
@@ -28,7 +38,7 @@ class Rod:
             self.pieces.append(piece)
             return
 
-        if piece.size <= self.pieces[-1].size:
+        if piece <= self.pieces[-1]:
             self.pieces.append(piece)
         else:
             raise TowerError(
