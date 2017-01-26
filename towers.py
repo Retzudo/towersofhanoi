@@ -56,7 +56,7 @@ class Rod:
 
     def __str__(self):
         return str(self.pieces)
-    
+
     def __len__(self):
         return len(self.pieces)
 
@@ -74,7 +74,7 @@ class Tower:
         on another rod."""
         if from_rod_index == to_rod_index:
             return
-        
+
         from_rod = self.rods[from_rod_index]
         to_rod = self.rods[to_rod_index]
 
@@ -100,6 +100,6 @@ def create_tower(num_of_rods=3, num_of_pieces=3):
     tower.rods = [Rod() for rod in range(num_of_rods)]
 
     # Populate the first rod
-    tower.rods[0].pieces = [Piece(num_of_pieces-p) for p in range(num_of_pieces)]
+    tower.rods[0].pieces = [Piece(num_of_pieces - p) for p in range(num_of_pieces)]
 
     return tower

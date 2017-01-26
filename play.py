@@ -3,6 +3,7 @@ import os
 from towers import create_tower, TowerError
 from towersvisualizer import Visualizer
 
+
 def ask_for_init():
     """Ask for initial values and return them as a tuple."""
     while True:
@@ -26,6 +27,7 @@ def ask_for_init():
             break
 
     return rods, pieces
+
 
 def game_loop():
     """Main game loop."""
@@ -65,7 +67,7 @@ def game_loop():
                 break
 
         try:
-            tower.move_piece(from_rod-1, to_rod-1)
+            tower.move_piece(from_rod - 1, to_rod - 1)
         except TowerError:
             print('Invalid move')
         else:

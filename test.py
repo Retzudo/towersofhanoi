@@ -26,7 +26,7 @@ class RodTestCase(unittest.TestCase):
         rod = Rod()
         big_piece = Piece(10)
         small_piece = Piece(1)
-        
+
         rod.push_piece(big_piece)
         rod.push_piece(small_piece)
 
@@ -55,7 +55,7 @@ class RodTestCase(unittest.TestCase):
         self.assertEqual(popped_piece, piece)
 
     def test_pop_piece_empty(self):
-        from towers import Rod, Piece, TowerError
+        from towers import Rod
 
         rod = Rod()
         with self.assertRaises(IndexError):
@@ -76,7 +76,7 @@ class TowerTestCase(unittest.TestCase):
         tower = Tower()
         tower.rods = [Rod() for i in range(3)]
 
-        tower.rods[0].pieces = [Piece(3-i) for i in range(3)]
+        tower.rods[0].pieces = [Piece(3 - i) for i in range(3)]
 
         tower.move_piece(0, 2)
         self.assertEqual(len(tower.rods[0].pieces), 2)
@@ -92,9 +92,9 @@ class TowerTestCase(unittest.TestCase):
         tower = Tower()
         tower.rods = [Rod() for i in range(3)]
 
-        tower.rods[0].pieces = [Piece(3-i) for i in range(3)]
+        tower.rods[0].pieces = [Piece(3 - i) for i in range(3)]
         tower.rods[1].pieces = [Piece(4)]
-        
+
         with self.assertRaises(TowerError):
             tower.move_piece(1, 0)
 
@@ -148,7 +148,7 @@ class VisualizerTestCase(unittest.TestCase):
 
         self.assertEqual(rendered_rod, expected)
 
-        #----------------------------
+        # ----------------------------
 
         tower = create_tower(6, 6)
         visualizer = Visualizer(tower)
@@ -202,15 +202,6 @@ class VisualizerTestCase(unittest.TestCase):
         self.assertEqual(rendered[2], ' [---]     |       |    ')
         self.assertEqual(rendered[3], '[-----]    |      [-]   ')
         self.assertEqual(rendered[4], '________________________')
-
-    def test_get_biggest_size(self):
-        from towers import create_tower
-        from towersvisualizer import Visualizer
-
-        tower = create_tower(3, 3)
-        visualizer = Visualizer(tower)
-
-        self.assertEqual(visualizer._get_biggest_size(), 3)
 
     def test_get_biggest_size(self):
         from towers import Tower, Rod, Piece
